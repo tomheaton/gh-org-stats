@@ -8,16 +8,16 @@ type Data = {
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
-    const { organisation } = req.query as { organisation: string };
+    const { organization } = req.query as { organization: string };
 
-    // console.log("org: " + organisation);
+    // console.log("org: " + organization);
 
-    const response = await fetch(`https://api.github.com/users/${organisation}`);
+    const response = await fetch(`https://api.github.com/users/${organization}`);
     const data = await response.json();
 
     if (data.message || data.type !== "Organization") {
-        console.log("No data or not an organisation.")
-        return res.status(200).json({ message: 'Unsuccessful: No data or not an organisation.' })
+        console.log("No data or not an organization.")
+        return res.status(404).json({ message: 'Unsuccessful: No data or not an organization.' })
     }
 
     return res.status(200).json({ message: 'Success', organization: data })
