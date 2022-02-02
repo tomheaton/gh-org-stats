@@ -10,8 +10,6 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 
     const { organization } = req.query as { organization: string };
 
-    // console.log("org: " + organization);
-
     const response = await fetch(`https://api.github.com/users/${organization}`);
     const data = await response.json();
 
